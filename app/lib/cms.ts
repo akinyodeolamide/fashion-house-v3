@@ -7,8 +7,8 @@ import archiveData from '@/app/data/archive.json'
 import settingsData from '@/app/data/settings.json'
 import statsData from '@/app/data/stats.json'
 
-// Type-safe data access layer
-// In production, this would connect to Decap CMS, Sanity, or a headless CMS
+// Type assertion for archive data (JSON strings don't match TS literal unions)
+const typedArchiveData = archiveData as { archive: ArchiveItem[] }
 
 export const cms = {
   products: {
@@ -30,13 +30,13 @@ export const cms = {
       )
     },
   },
-
+  
   categories: {
     getAll: (): Category[] => categoriesData.categories,
     getBySlug: (slug: string): Category | undefined =>
       categoriesData.categories.find(c => c.slug === slug),
   },
-
+  
   posts: {
     getAll: (): Post[] => postsData.posts,
     getFeatured: (): Post[] => postsData.posts.filter(p => p.featured).slice(0, 4),
@@ -51,22 +51,22 @@ export const cms = {
       )
     },
   },
-
+  
   testimonials: {
     getAll: (): Testimonial[] => testimonialsData.testimonials,
   },
-
+  
   archive: {
-    getAll: (): ArchiveItem[] => archiveData.archive,
+    getAll: (): ArchiveItem[] => typedArchiveData.archive,
     getByCategory: (category: string): ArchiveItem[] =>
-      archiveData.archive.filter(a => a.category === category),
-    getFeatured: (): ArchiveItem[] => archiveData.archive.slice(0, 6),
+      typedArchiveData.archive.filter(a => a.category === category),
+    getFeatured: (): ArchiveItem[] => typedArchiveData.archive.slice(0, 6),
   },
-
+  
   settings: {
     get: (): SiteSettings => settingsData.settings,
   },
-
+  
   stats: {
     getAll: (): TrustStat[] => statsData.stats,
   },
