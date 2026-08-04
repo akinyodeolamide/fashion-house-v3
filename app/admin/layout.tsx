@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import AdminSidebar from '@/app/components/admin/AdminSidebar'
 import AdminHeader from '@/app/components/admin/AdminHeader'
 import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
@@ -10,24 +10,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [mounted, setMounted] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
     const auth = localStorage.getItem('admin_auth')
-    if (auth !== 'perry-chase') {
-      router.replace('/admin/login/')
-    } else {
+    if (auth === 'perry-chase') {
       setIsAuthenticated(true)
+    } else if (pathname !== '/admin/login/') {
+      router.replace('/admin/login/')
     }
-  }, [router])
+  }, [router, pathname])
 
-  // Don't render anything until after browser mount (prevents SSR crash)
   if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-secondary">
         <LoadingSpinner />
       </div>
     )
+  }
+
+  // Always render login page without the admin shell
+  if (pathname === '/admin/login/') {
+    return <>{children}</>
   }
 
   if (!isAuthenticated) return null
