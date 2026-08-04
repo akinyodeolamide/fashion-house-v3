@@ -7,24 +7,22 @@ import AdminHeader from '@/app/components/admin/AdminHeader'
 import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('admin_token')
-      if (!token) {
-        router.push('/admin/login/')
-      } else {
-        setIsAuthenticated(true)
-      }
-      setIsLoading(false)
+    setMounted(true)
+    const auth = localStorage.getItem('admin_auth')
+    if (auth !== 'perry-chase') {
+      router.replace('/admin/login/')
+    } else {
+      setIsAuthenticated(true)
     }
-    checkAuth()
   }, [router])
 
-  if (isLoading) {
+  // Don't render anything until after browser mount (prevents SSR crash)
+  if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-secondary">
         <LoadingSpinner />
