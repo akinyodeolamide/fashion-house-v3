@@ -3,8 +3,6 @@ backend:
   repo: akinyodeolamide/fashion-house-v3
   branch: main
 
-publish_mode: editorial_workflow
-
 media_folder: "public/images"
 public_folder: "/images"
 
