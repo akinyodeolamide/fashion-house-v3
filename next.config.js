@@ -4,6 +4,7 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  transpilePackages: ['framer-motion'],
 }
 
 module.exports = nextConfig
