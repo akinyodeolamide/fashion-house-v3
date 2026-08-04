@@ -1,0 +1,49 @@
+{
+  "testimonials": [
+    {
+      "id": "test-1",
+      "name": "Chief Emmanuel Okafor",
+      "location": "Abuja",
+      "text": "The Agbada Òwe Bespoke created for my chieftaincy conferment was nothing short of magnificent. The attention to detail, the quality of the fabric, and the precision of the embroidery exceeded all my expectations. I received compliments from everyone at the ceremony.",
+      "rating": 5,
+      "image": "/images/testimonials/chief-emmanuel.jpg",
+      "date": "2024-05-10"
+    },
+    {
+      "id": "test-2",
+      "name": "David Adeyemi",
+      "location": "Lagos",
+      "text": "I've been a client for three years now and the consistency in quality is remarkable. From my first Kaftan to my most recent English suit, every piece fits perfectly and looks incredible. The WhatsApp consultation process is seamless and professional.",
+      "rating": 5,
+      "image": "",
+      "date": "2024-04-22"
+    },
+    {
+      "id": "test-3",
+      "name": "Tunde Bakare",
+      "location": "Ibadan",
+      "text": "Ordered a Senator wear set for my brother's wedding. The delivery was prompt, the packaging was elegant, and the outfit itself was flawless. The fabric quality is premium and the stitching is impeccable. Highly recommended.",
+      "rating": 5,
+      "image": "/images/testimonials/tunde-bakare.jpg",
+      "date": "2024-03-15"
+    },
+    {
+      "id": "test-4",
+      "name": "Michael Obi",
+      "location": "Port Harcourt",
+      "text": "The streetwear collection is on another level. The Lagos Edition hoodie I got is easily the highest quality piece in my wardrobe. The Adire patterns are beautifully integrated into a modern design. People stop me on the street to ask where I got it.",
+      "rating": 5,
+      "image": "",
+      "date": "2024-06-01"
+    },
+    {
+      "id": "test-5",
+      "name": "Alhaji Ibrahim Musa",
+      "location": "Kano",
+      "text": "I needed a special outfit for my daughter's wedding and Òwe Bespoke delivered beyond imagination. The Isiagu set was crafted with such care and respect for tradition. The designer understood exactly what I wanted and brought it to life.",
+      "rating": 5,
+      "image": "/images/testimonials/alhaji-ibrahim.jpg",
+      "date": "2024-02-20"
+    }
+  ]
+}

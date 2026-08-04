@@ -1,0 +1,8 @@
+{
+  "stats": [
+    { "label": "Years of Experience", "value": 15, "suffix": "+" },
+    { "label": "Outfits Delivered", "value": 2500, "suffix": "+" },
+    { "label": "Happy Clients", "value": 800, "suffix": "+" },
+    { "label": "Cities Served", "value": 12, "suffix": "" }
+  ]
+}

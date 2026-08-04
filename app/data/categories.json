@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Agbada",
+      "slug": "agbada",
+      "description": "Majestic three-piece traditional wear featuring wide-sleeved flowing robes. The epitome of Nigerian royal elegance.",
+      "image": "/images/collection-agbada.jpg",
+      "productCount": 24
+    },
+    {
+      "id": "cat-2",
+      "name": "Kaftan",
+      "slug": "kaftan",
+      "description": "Elegant flowing robes with intricate embroidery. Perfect for both casual sophistication and formal gatherings.",
+      "image": "/images/collection-kaftan.jpg",
+      "productCount": 18
+    },
+    {
+      "id": "cat-3",
+      "name": "Senator Wear",
+      "slug": "senator-wear",
+      "description": "Modern two-piece native attire with clean lines and contemporary cuts. A blend of tradition and modernity.",
+      "image": "/images/collection-senator.jpg",
+      "productCount": 15
+    },
+    {
+      "id": "cat-4",
+      "name": "Native Wear",
+      "slug": "native-wear",
+      "description": "Authentic traditional Nigerian attire including Isiagu, Ankara fusion, and cultural ceremonial wear.",
+      "image": "/images/collection-native.jpg",
+      "productCount": 20
+    },
+    {
+      "id": "cat-5",
+      "name": "English Wear",
+      "slug": "english-wear",
+      "description": "Bespoke suits, blazers, and formal Western wear tailored with Nigerian precision and attention to detail.",
+      "image": "/images/collection-english.jpg",
+      "productCount": 12
+    },
+    {
+      "id": "cat-6",
+      "name": "Streetwear",
+      "slug": "streetwear",
+      "description": "Conturban fusion wear blending Nigerian aesthetics with global street fashion trends. Bold, expressive, unique.",
+      "image": "/images/collection-streetwear.jpg",
+      "productCount": 16
+    }
+  ]
+}

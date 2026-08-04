@@ -1,0 +1,84 @@
+{
+  "archive": [
+    {
+      "id": "arch-1",
+      "title": "Agbada Before & After Tailoring",
+      "category": "before-after",
+      "images": ["/images/archive/before-after-1a.jpg", "/images/archive/before-after-1b.jpg"],
+      "video": "",
+      "description": "Raw fabric to finished masterpiece. See the transformation of premium Aso-Oke into a finished Agbada set.",
+      "date": "2024-05-01",
+      "tags": ["agbada", "aso-oke", "tailoring", "transformation"]
+    },
+    {
+      "id": "arch-2",
+      "title": "Client Wedding Outfit - Royal Blue",
+      "category": "client-outfit",
+      "images": ["/images/archive/client-1a.jpg", "/images/archive/client-1b.jpg", "/images/archive/client-1c.jpg"],
+      "video": "",
+      "description": "Complete wedding ensemble for a Lagos client. Royal blue Agbada with gold embroidery.",
+      "date": "2024-04-15",
+      "tags": ["wedding", "client", "agbada", "royal-blue"]
+    },
+    {
+      "id": "arch-3",
+      "title": "Fashion Shoot - Urban Native",
+      "category": "fashion-shoot",
+      "images": ["/images/archive/shoot-1a.jpg", "/images/archive/shoot-1b.jpg", "/images/archive/shoot-1c.jpg", "/images/archive/shoot-1d.jpg"],
+      "video": "",
+      "description": "Editorial shoot featuring the Urban Native collection. Shot on location in Lekki, Lagos.",
+      "date": "2024-03-20",
+      "tags": ["fashion-shoot", "editorial", "urban-native", "lekki"]
+    },
+    {
+      "id": "arch-4",
+      "title": "Hand Embroidery Process",
+      "category": "process",
+      "images": ["/images/archive/process-1a.jpg", "/images/archive/process-1b.jpg"],
+      "video": "/videos/embroidery-process.mp4",
+      "description": "A glimpse into the intricate hand-embroidery process that adorns our premium pieces.",
+      "date": "2024-03-10",
+      "tags": ["embroidery", "process", "handcraft", "behind-the-scenes"]
+    },
+    {
+      "id": "arch-5",
+      "title": "Senator Wear Collection Shoot",
+      "category": "fashion-shoot",
+      "images": ["/images/archive/shoot-2a.jpg", "/images/archive/shoot-2b.jpg"],
+      "video": "",
+      "description": "Studio shoot showcasing the versatility of our Senator Wear collection.",
+      "date": "2024-02-28",
+      "tags": ["senator-wear", "studio", "collection", "fashion-shoot"]
+    },
+    {
+      "id": "arch-6",
+      "title": "Kaftan Fitting Session",
+      "category": "before-after",
+      "images": ["/images/archive/fitting-1a.jpg", "/images/archive/fitting-1b.jpg"],
+      "video": "",
+      "description": "Before and after final fitting adjustments on a bespoke emerald kaftan.",
+      "date": "2024-02-15",
+      "tags": ["kaftan", "fitting", "before-after", "bespoke"]
+    },
+    {
+      "id": "arch-7",
+      "title": "Streetwear Campaign Video",
+      "category": "video",
+      "images": ["/images/archive/video-thumb-1.jpg"],
+      "video": "/videos/streetwear-campaign.mp4",
+      "description": "Full campaign video for the Lagos Edition streetwear collection.",
+      "date": "2024-01-30",
+      "tags": ["streetwear", "video", "campaign", "lagos-edition"]
+    },
+    {
+      "id": "arch-8",
+      "title": "English Wear Corporate Client",
+      "category": "client-outfit",
+      "images": ["/images/archive/client-2a.jpg", "/images/archive/client-2b.jpg"],
+      "video": "",
+      "description": "Bespoke navy three-piece suit created for a corporate executive client.",
+      "date": "2024-01-15",
+      "tags": ["english-wear", "suit", "corporate", "client"]
+    }
+  ]
+}
