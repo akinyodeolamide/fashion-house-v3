@@ -7,19 +7,20 @@ import defaultArchive from '@/app/data/archive.json'
 import defaultSettings from '@/app/data/settings.json'
 import defaultStats from '@/app/data/stats.json'
 
-// Only use localStorage in admin panel. Public site always reads fresh JSON.
+// Public site ALWAYS reads fresh JSON. Admin only uses localStorage for preview.
 function isAdmin(): boolean {
   if (typeof window === 'undefined') return false
   return window.location.pathname.startsWith('/admin')
 }
 
 function getStoredData<T>(key: string, fallback: T): T {
+  // NEVER use localStorage on public pages
   if (!isAdmin()) return fallback
   try {
     const stored = localStorage.getItem(`cms_${key}`)
     if (stored) return JSON.parse(stored)
   } catch {
-    // ignore parse errors
+    // ignore
   }
   return fallback
 }
