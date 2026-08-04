@@ -7,8 +7,14 @@ import defaultArchive from '@/app/data/archive.json'
 import defaultSettings from '@/app/data/settings.json'
 import defaultStats from '@/app/data/stats.json'
 
+// Only use localStorage in admin panel. Public site always reads fresh JSON.
+function isAdmin(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.location.pathname.startsWith('/admin')
+}
+
 function getStoredData<T>(key: string, fallback: T): T {
-  if (typeof window === 'undefined') return fallback
+  if (!isAdmin()) return fallback
   try {
     const stored = localStorage.getItem(`cms_${key}`)
     if (stored) return JSON.parse(stored)
@@ -19,12 +25,13 @@ function getStoredData<T>(key: string, fallback: T): T {
 }
 
 function setStoredData<T>(key: string, data: T): void {
-  if (typeof window === 'undefined') return
+  if (!isAdmin()) return
   localStorage.setItem(`cms_${key}`, JSON.stringify(data))
 }
 
+// Initialize storage with defaults if empty (admin only)
 export function initCMSData(): void {
-  if (typeof window === 'undefined') return
+  if (!isAdmin()) return
   const keys = ['products', 'categories', 'posts', 'testimonials', 'archive', 'settings', 'stats']
   keys.forEach((key) => {
     if (!localStorage.getItem(`cms_${key}`)) {
