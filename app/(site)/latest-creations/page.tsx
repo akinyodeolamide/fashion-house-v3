@@ -1,9 +1,9 @@
 import SectionHeader from '@/app/components/ui/SectionHeader'
+import AnimatedArticle from '@/app/components/ui/AnimatedArticle'
 import cms from '@/app/lib/cms'
 import { generateSiteMetadata } from '@/app/lib/seo'
 import { FaCalendar } from 'react-icons/fa'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 
 export const metadata = generateSiteMetadata(
   'Latest Creations',
@@ -23,7 +23,7 @@ export default function LatestCreationsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-16">
           {posts.map((post, index) => (
-            <motion.article
+            <AnimatedArticle
               key={post.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function LatestCreationsPage() {
                   <span key={tag} className="px-2 py-1 bg-secondary text-text/60 text-xs rounded-sm">#{tag}</span>
                 ))}
               </div>
-            </motion.article>
+            </AnimatedArticle>
           ))}
         </div>
       </div>
