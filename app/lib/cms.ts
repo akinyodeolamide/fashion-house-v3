@@ -29,7 +29,6 @@ function setStoredData<T>(key: string, data: T): void {
   localStorage.setItem(`cms_${key}`, JSON.stringify(data))
 }
 
-// Initialize storage with defaults if empty (admin only)
 export function initCMSData(): void {
   if (!isAdmin()) return
   const keys = ['products', 'categories', 'posts', 'testimonials', 'archive', 'settings', 'stats']
