@@ -1,74 +1,115 @@
 import { Product, Category, Post, Testimonial, ArchiveItem, SiteSettings, TrustStat } from '@/app/types'
-import productsData from '@/app/data/products.json'
-import categoriesData from '@/app/data/categories.json'
-import postsData from '@/app/data/posts.json'
-import testimonialsData from '@/app/data/testimonials.json'
-import archiveData from '@/app/data/archive.json'
-import settingsData from '@/app/data/settings.json'
-import statsData from '@/app/data/stats.json'
+import defaultProducts from '@/app/data/products.json'
+import defaultCategories from '@/app/data/categories.json'
+import defaultPosts from '@/app/data/posts.json'
+import defaultTestimonials from '@/app/data/testimonials.json'
+import defaultArchive from '@/app/data/archive.json'
+import defaultSettings from '@/app/data/settings.json'
+import defaultStats from '@/app/data/stats.json'
 
-// Type assertion for archive data (JSON strings don't match TS literal unions)
-const typedArchiveData = archiveData as { archive: ArchiveItem[] }
+// Client-side localStorage helper
+function getStoredData<T>(key: string, fallback: T): T {
+  if (typeof window === 'undefined') return fallback
+  try {
+    const stored = localStorage.getItem(`cms_${key}`)
+    if (stored) return JSON.parse(stored)
+  } catch {
+    // ignore parse errors
+  }
+  return fallback
+}
+
+function setStoredData<T>(key: string, data: T): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(`cms_${key}`, JSON.stringify(data))
+}
+
+// Initialize storage with defaults if empty
+export function initCMSData(): void {
+  if (typeof window === 'undefined') return
+  const keys = ['products', 'categories', 'posts', 'testimonials', 'archive', 'settings', 'stats']
+  keys.forEach((key) => {
+    if (!localStorage.getItem(`cms_${key}`)) {
+      const defaults: Record<string, unknown> = {
+        products: defaultProducts,
+        categories: defaultCategories,
+        posts: defaultPosts,
+        testimonials: defaultTestimonials,
+        archive: defaultArchive,
+        settings: defaultSettings,
+        stats: defaultStats,
+      }
+      localStorage.setItem(`cms_${key}`, JSON.stringify(defaults[key]))
+    }
+  })
+}
 
 export const cms = {
   products: {
-    getAll: (): Product[] => productsData.products,
-    getById: (id: string): Product | undefined => 
-      productsData.products.find(p => p.id === id),
+    getAll: (): Product[] => getStoredData('products', defaultProducts).products,
+    setAll: (products: Product[]) => setStoredData('products', { products }),
+    getById: (id: string): Product | undefined =>
+      cms.products.getAll().find((p: Product) => p.id === id),
     getBySlug: (slug: string): Product | undefined =>
-      productsData.products.find(p => p.slug === slug),
+      cms.products.getAll().find((p: Product) => p.slug === slug),
     getByCategory: (categorySlug: string): Product[] =>
-      productsData.products.filter(p => p.categorySlug === categorySlug),
+      cms.products.getAll().filter((p: Product) => p.categorySlug === categorySlug),
     getFeatured: (): Product[] =>
-      productsData.products.filter(p => p.featured),
+      cms.products.getAll().filter((p: Product) => p.featured),
     search: (query: string): Product[] => {
       const q = query.toLowerCase()
-      return productsData.products.filter(p =>
+      return cms.products.getAll().filter((p: Product) =>
         p.name.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q) ||
         p.category.toLowerCase().includes(q)
       )
     },
   },
-  
+
   categories: {
-    getAll: (): Category[] => categoriesData.categories,
+    getAll: (): Category[] => getStoredData('categories', defaultCategories).categories,
+    setAll: (categories: Category[]) => setStoredData('categories', { categories }),
     getBySlug: (slug: string): Category | undefined =>
-      categoriesData.categories.find(c => c.slug === slug),
+      cms.categories.getAll().find((c: Category) => c.slug === slug),
   },
-  
+
   posts: {
-    getAll: (): Post[] => postsData.posts,
-    getFeatured: (): Post[] => postsData.posts.filter(p => p.featured).slice(0, 4),
+    getAll: (): Post[] => getStoredData('posts', defaultPosts).posts,
+    setAll: (posts: Post[]) => setStoredData('posts', { posts }),
+    getFeatured: (): Post[] => cms.posts.getAll().filter((p: Post) => p.featured).slice(0, 4),
     getById: (id: string): Post | undefined =>
-      postsData.posts.find(p => p.id === id),
+      cms.posts.getAll().find((p: Post) => p.id === id),
     search: (query: string): Post[] => {
       const q = query.toLowerCase()
-      return postsData.posts.filter(p =>
+      return cms.posts.getAll().filter((p: Post) =>
         p.title.toLowerCase().includes(q) ||
         p.caption.toLowerCase().includes(q) ||
-        p.tags.some(t => t.toLowerCase().includes(q))
+        p.tags.some((t: string) => t.toLowerCase().includes(q))
       )
     },
   },
-  
+
   testimonials: {
-    getAll: (): Testimonial[] => testimonialsData.testimonials,
+    getAll: (): Testimonial[] => getStoredData('testimonials', defaultTestimonials).testimonials,
+    setAll: (testimonials: Testimonial[]) => setStoredData('testimonials', { testimonials }),
   },
-  
+
   archive: {
-    getAll: (): ArchiveItem[] => typedArchiveData.archive,
+    getAll: (): ArchiveItem[] => getStoredData('archive', defaultArchive).archive,
+    setAll: (archive: ArchiveItem[]) => setStoredData('archive', { archive }),
     getByCategory: (category: string): ArchiveItem[] =>
-      typedArchiveData.archive.filter(a => a.category === category),
-    getFeatured: (): ArchiveItem[] => typedArchiveData.archive.slice(0, 6),
+      cms.archive.getAll().filter((a: ArchiveItem) => a.category === category),
+    getFeatured: (): ArchiveItem[] => cms.archive.getAll().slice(0, 6),
   },
-  
+
   settings: {
-    get: (): SiteSettings => settingsData.settings,
+    get: (): SiteSettings => getStoredData('settings', defaultSettings).settings,
+    set: (settings: SiteSettings) => setStoredData('settings', { settings }),
   },
-  
+
   stats: {
-    getAll: (): TrustStat[] => statsData.stats,
+    getAll: (): TrustStat[] => getStoredData('stats', defaultStats).stats,
+    setAll: (stats: TrustStat[]) => setStoredData('stats', { stats }),
   },
 }
 
