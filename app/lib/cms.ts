@@ -7,7 +7,6 @@ import defaultArchive from '@/app/data/archive.json'
 import defaultSettings from '@/app/data/settings.json'
 import defaultStats from '@/app/data/stats.json'
 
-// Client-side localStorage helper
 function getStoredData<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback
   try {
@@ -24,7 +23,6 @@ function setStoredData<T>(key: string, data: T): void {
   localStorage.setItem(`cms_${key}`, JSON.stringify(data))
 }
 
-// Initialize storage with defaults if empty
 export function initCMSData(): void {
   if (typeof window === 'undefined') return
   const keys = ['products', 'categories', 'posts', 'testimonials', 'archive', 'settings', 'stats']
@@ -95,7 +93,7 @@ export const cms = {
   },
 
   archive: {
-    getAll: (): ArchiveItem[] => getStoredData('archive', defaultArchive).archive,
+    getAll: (): ArchiveItem[] => getStoredData('archive', defaultArchive).archive as ArchiveItem[],
     setAll: (archive: ArchiveItem[]) => setStoredData('archive', { archive }),
     getByCategory: (category: string): ArchiveItem[] =>
       cms.archive.getAll().filter((a: ArchiveItem) => a.category === category),
