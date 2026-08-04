@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
 import SectionHeader from '@/app/components/ui/SectionHeader'
+import AnimatedDiv from '@/app/components/ui/AnimatedDiv'
 import cms from '@/app/lib/cms'
 import { generateSiteMetadata } from '@/app/lib/seo'
 
@@ -25,20 +25,20 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <AnimatedDiv initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
               <span className="text-accent text-sm tracking-[0.3em] uppercase">Mission</span>
               <h2 className="text-2xl md:text-3xl font-serif text-text mt-4 mb-6">Preserving Heritage Through Modern Elegance</h2>
               <p className="text-text/70 leading-relaxed">
                 To create exceptional bespoke fashion that honors Nigerian cultural heritage while embracing contemporary design. Every stitch is a bridge between tradition and innovation.
               </p>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
+            </AnimatedDiv>
+            <AnimatedDiv initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
               <span className="text-accent text-sm tracking-[0.3em] uppercase">Vision</span>
               <h2 className="text-2xl md:text-3xl font-serif text-text mt-4 mb-6">The Global Standard for African Luxury</h2>
               <p className="text-text/70 leading-relaxed">
                 To establish Nigerian bespoke tailoring as a globally recognized symbol of luxury, craftsmanship, and cultural pride — worn by discerning gentlemen worldwide.
               </p>
-            </motion.div>
+            </AnimatedDiv>
           </div>
         </div>
       </section>
@@ -52,10 +52,10 @@ export default function AboutPage() {
               { title: 'Hand Finishing', desc: 'Every piece receives meticulous hand-finishing, from embroidery to button attachment. Machines assist; hands perfect.' },
               { title: 'Precision Fitting', desc: 'Multiple fitting sessions ensure your garment drapes exactly as intended. Comfort and silhouette are never compromised.' },
             ].map((item, i) => (
-              <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white p-8 rounded-sm">
+              <AnimatedDiv key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white p-8 rounded-sm">
                 <h3 className="font-serif text-xl text-primary mb-3">{item.title}</h3>
                 <p className="text-text/70 text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
+              </AnimatedDiv>
             ))}
           </div>
         </div>
@@ -86,10 +86,10 @@ export default function AboutPage() {
               'Discreet, professional service',
               'Legacy pieces that last generations',
             ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex items-center gap-4 p-6 bg-secondary rounded-sm">
+              <AnimatedDiv key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex items-center gap-4 p-6 bg-secondary rounded-sm">
                 <span className="w-8 h-8 flex items-center justify-center bg-accent text-primary rounded-full text-sm font-medium">{i + 1}</span>
                 <span className="text-text font-medium">{item}</span>
-              </motion.div>
+              </AnimatedDiv>
             ))}
           </div>
         </div>
