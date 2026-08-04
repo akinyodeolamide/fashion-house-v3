@@ -1,101 +1,85 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaChevronDown } from 'react-icons/fa'
-import Button from '@/app/components/ui/Button'
-import WhatsAppButton from '@/app/components/ui/WhatsAppButton'
+import Link from 'next/link'
+import { FaWhatsapp } from 'react-icons/fa'
 import cms from '@/app/lib/cms'
 import { generateGeneralWhatsAppLink } from '@/app/lib/whatsapp'
 
 export default function HeroSection() {
   const settings = cms.settings.get()
-  const [currentImage, setCurrentImage] = useState(0)
-  const images = settings.heroImages
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const slides = [
+    { image: '/images/hero-agbada.jpg', alt: 'Agbada' },
+    { image: '/images/hero-kaftan.jpg', alt: 'Kaftan' },
+    { image: '/images/hero-english.jpg', alt: 'English Wear' },
+    { image: '/images/hero-streetwear.jpg', alt: 'Streetwear' },
+  ]
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length)
-    }, 6000)
-    return () => clearInterval(interval)
-  }, [images.length])
-
-  const whatsappLink = generateGeneralWhatsAppLink()
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [slides.length])
 
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[1200px] overflow-hidden">
-      {/* Background Images */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentImage}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: 'easeOut' }}
-          className="absolute inset-0"
+    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.alt}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
         >
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${images[currentImage]})` }}
+            style={{ backgroundImage: `url(${slide.image})` }}
           />
           <div className="absolute inset-0 bg-primary/60" />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="max-w-4xl"
-        >
-          <p className="text-accent text-sm tracking-[0.3em] uppercase mb-6">
-            Premium Nigerian Fashion House
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium text-white leading-tight mb-6">
-            {settings.heroHeadline}
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            {settings.heroSubheading}
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button href="/collections/" variant="secondary" size="lg">
-              Explore Collections
-            </Button>
-            <WhatsAppButton href={whatsappLink} label="Chat with the Designer" size="lg" />
-          </div>
-        </motion.div>
-
-        {/* Image Indicators */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImage(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentImage ? 'bg-accent w-8' : 'bg-white/40'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
         </div>
+      ))}
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <p className="text-accent text-sm tracking-[0.3em] uppercase mb-4">
+          Premium Nigerian Fashion House
+        </p>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-6 leading-tight">
+          {settings.heroHeadline || 'Premium Bespoke Fashion Crafted for Every Occasion'}
+        </h1>
+        <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          {settings.heroSubheading || 'From traditional Agbada to contemporary streetwear, every piece is meticulously tailored to reflect your unique style and stature.'}
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            href="/collections/"
+            className="px-8 py-4 bg-accent text-primary font-medium rounded-sm hover:bg-accent/90 transition-colors"
           >
-            <FaChevronDown className="text-white/50" size={20} />
-          </motion.div>
-        </motion.div>
+            Explore Collections
+          </Link>
+          <a
+            href={generateGeneralWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-white/10 text-white font-medium rounded-sm hover:bg-white/20 transition-colors flex items-center gap-2"
+          >
+            <FaWhatsapp />
+            Chat with the Designer
+          </a>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === currentSlide ? 'bg-accent' : 'bg-white/40'
+            }`}
+          />
+        ))}
       </div>
     </section>
   )
