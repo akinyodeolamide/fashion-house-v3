@@ -1,9 +1,10 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useState, useMemo } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import SearchInput from '@/app/components/ui/SearchInput'
 import PriceDisplay from '@/app/components/ui/PriceDisplay'
 import WhatsAppButton from '@/app/components/ui/WhatsAppButton'
@@ -51,8 +52,8 @@ export default function SearchPage() {
           <div className="mb-16">
             <h2 className="text-xl font-serif text-text mb-6">Products ({productResults.length})</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {productResults.map((product, index) => (
-                <motion.div key={product.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }} className="group">
+              {productResults.map((product) => (
+                <div key={product.id} className="group">
                   <Link href={`/collections/${product.categorySlug}/${product.slug}/`}>
                     <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-secondary mb-4">
                       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${product.images[0]})` }} />
@@ -66,7 +67,7 @@ export default function SearchPage() {
                   <div className="mt-3">
                     <WhatsAppButton href={generateProductWhatsAppLink(product)} label={getWhatsAppCTA(product.category)} size="sm" className="w-full" />
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -76,8 +77,8 @@ export default function SearchPage() {
           <div>
             <h2 className="text-xl font-serif text-text mb-6">Latest Creations ({postResults.length})</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {postResults.map((post, index) => (
-                <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}>
+              {postResults.map((post) => (
+                <div key={post.id}>
                   <Link href={`/latest-creations/${post.slug}/`} className="flex gap-4 group">
                     <div className="w-24 h-24 flex-shrink-0 rounded-sm overflow-hidden bg-secondary">
                       <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${post.images[0]})` }} />
@@ -87,7 +88,7 @@ export default function SearchPage() {
                       <p className="text-sm text-text/70 line-clamp-2">{post.caption}</p>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
