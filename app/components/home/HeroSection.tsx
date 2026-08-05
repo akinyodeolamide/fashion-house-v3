@@ -50,10 +50,13 @@ export default function HeroSection() {
           }`}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
-          <div className="absolute inset-0 bg-primary/60" />
+  className={`absolute inset-0 bg-cover ${
+    slide.position === 'left'
+      ? 'bg-[30%_center]'
+      : 'bg-[70%_center]'
+  }`}
+  style={{ backgroundImage: `url(${slide.image})` }}
+/>
         </div>
       ))}
 
