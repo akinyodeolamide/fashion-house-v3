@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatePresence, motion } from 'framer-motion'
 import { FaWhatsapp } from 'react-icons/fa'
 
 import cms from '@/app/lib/cms'
@@ -12,242 +11,304 @@ import { generateGeneralWhatsAppLink } from '@/app/lib/whatsapp'
 type Slide = {
   image: string
   alt: string
-  position: 'left' | 'right'
-  eyebrow: string
-  title: string
-  description: string
+  side: 'left' | 'right'
 }
+
+const slides: Slide[] = [
+  {
+    image: '/images/hero-agbada.jpg',
+    alt: 'Agbada',
+    side: 'right',
+  },
+  {
+    image: '/images/hero-kaftan.jpg',
+    alt: 'Kaftan',
+    side: 'left',
+  },
+  {
+    image: '/images/hero-english.jpg',
+    alt: 'English Wear',
+    side: 'right',
+  },
+  {
+    image: '/images/hero-streetwear.jpg',
+    alt: 'Streetwear',
+    side: 'left',
+  },
+]
 
 export default function HeroSection() {
   const settings = cms.settings.get()
 
-  const slides: Slide[] = [
-    {
-      image: '/images/hero-agbada.jpg',
-      alt: 'Agbada',
-      position: 'right',
-      eyebrow: 'Royal Heritage',
-      title:
-        settings.heroHeadline ||
-        'Premium Bespoke Fashion Crafted for Every Occasion',
-      description:
-        settings.heroSubheading ||
-        'Handcrafted Agbada, Kaftans, English wear and luxury streetwear tailored with precision for individuals who appreciate elegance.'
-    },
-    {
-      image: '/images/hero-kaftan.jpg',
-      alt: 'Kaftan',
-      position: 'left',
-      eyebrow: 'Modern Tradition',
-      title:
-        settings.heroHeadline ||
-        'Premium Bespoke Fashion Crafted for Every Occasion',
-      description:
-        settings.heroSubheading ||
-        'Luxury senator wears and Kaftans designed with timeless sophistication and exceptional craftsmanship.'
-    },
-    {
-      image: '/images/hero-english.jpg',
-      alt: 'English Wear',
-      position: 'right',
-      eyebrow: 'Executive Luxury',
-      title:
-        settings.heroHeadline ||
-        'Premium Bespoke Fashion Crafted for Every Occasion',
-      description:
-        settings.heroSubheading ||
-        'Sharp tailoring and premium fabrics for executives who value confidence, elegance and style.'
-    },
-    {
-      image: '/images/hero-streetwear.jpg',
-      alt: 'Streetwear',
-      position: 'left',
-      eyebrow: 'Contemporary Style',
-      title:
-        settings.heroHeadline ||
-        'Premium Bespoke Fashion Crafted for Every Occasion',
-      description:
-        settings.heroSubheading ||
-        'Luxury streetwear designed for creatives who want comfort without compromising premium quality.'
-    }
-  ]
-
-  const [current, setCurrent] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length)
-    }, 6000)
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
 
     return () => clearInterval(timer)
-  }, [slides.length])
-
-  const slide = slides[current]
+  }, [])
 
   return (
-    <section className="relative overflow-hidden bg-black min-h-screen">
+    <section className="relative overflow-hidden h-screen min-h-[760px]">
 
-      <AnimatePresence mode="wait">
+      {/* =========================
+            SLIDES
+      ========================== */}
 
-        <motion.div
-          key={slide.image}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
-        >
+      {slides.map((slide, index) => {
 
-          <motion.div
-            initial={{ scale: 1.08 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 8, ease: 'easeOut' }}
-            className="absolute inset-0"
-          >
+        const active = index === currentSlide
 
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              priority
-              sizes="100vw"
-              className={`object-cover ${
-                slide.position === 'left'
-                  ? 'object-left'
-                  : 'object-right'
-              }`}
-            />
-
-          </motion.div>
-
-          <div className="absolute inset-0 bg-black/35" />
+        return (
 
           <div
-            className={`absolute inset-0 ${
-              slide.position === 'right'
-                ? 'bg-gradient-to-r from-black/85 via-black/55 to-transparent'
-                : 'bg-gradient-to-l from-black/85 via-black/55 to-transparent'
-            }`}
-          />
-
-        </motion.div>
-
-      </AnimatePresence>
-
-      <div className="relative z-20 mx-auto max-w-7xl min-h-screen px-6 lg:px-10">
-
-        <div
-          className={`grid min-h-screen items-center gap-12 lg:grid-cols-2 ${
-            slide.position === 'right'
-              ? ''
-              : 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1'
-          }`}
-        >
-
-          <motion.div
             key={slide.alt}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: .7 }}
-            className="max-w-2xl text-center lg:text-left"
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              active ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
           >
 
-            <p className="mb-5 tracking-[0.35em] uppercase text-accent text-sm">
-              {slide.eyebrow}
-            </p>
+            {/* =========================
+                 MOBILE IMAGE
+            ========================== */}
 
-            <h1 className="font-serif text-white leading-tight text-5xl md:text-6xl xl:text-7xl">
-              {slide.title}
-            </h1>
+            <div className="absolute inset-0 lg:hidden">
 
-            <p className="mt-8 text-white/80 text-lg leading-8 max-w-xl">
-              {slide.description}
-            </p>
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className={`object-cover object-center transition-transform duration-[7000ms] ${
+                  active ? 'scale-105' : 'scale-100'
+                }`}
+              />
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
-
-              <Link
-                href="/collections"
-                className="inline-flex items-center justify-center rounded-sm bg-accent px-8 py-4 font-medium text-primary transition-all duration-300 hover:scale-105 hover:bg-accent/90"
-              >
-                Explore Collections
-              </Link>
-
-              <a
-                href={generateGeneralWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 rounded-sm border border-white/20 bg-white/10 px-8 py-4 text-white backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20"
-              >
-                <FaWhatsapp className="text-xl" />
-                Chat with the Designer
-              </a>
-
-            </div>
-            <div className="mt-16 flex items-center gap-4 justify-center lg:justify-start">
-
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrent(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    current === index
-                      ? 'w-10 bg-accent'
-                      : 'w-2 bg-white/40 hover:bg-white/70'
-                  }`}
-                />
-              ))}
+              <div className="absolute inset-0 bg-black/55" />
 
             </div>
 
-          </motion.div>
+            {/* =========================
+                DESKTOP IMAGE
+            ========================== */}
 
-          <div className="hidden lg:block" />
+            <div className="hidden lg:grid absolute inset-0 grid-cols-2">
+
+              {slide.side === 'left' ? (
+                <>
+                  <div className="relative overflow-hidden">
+
+                    <Image
+                      src={slide.image}
+                      alt={slide.alt}
+                      fill
+                      priority={index === 0}
+                      sizes="50vw"
+                      className={`object-contain object-left transition-transform duration-[7000ms] ${
+                        active ? 'scale-105' : 'scale-100'
+                      }`}
+                    />
+
+                  </div>
+
+                  <div className="bg-[#0f1110]" />
+
+                </>
+              ) : (
+                <>
+                  <div className="bg-[#0f1110]" />
+
+                  <div className="relative overflow-hidden">
+
+                    <Image
+                      src={slide.image}
+                      alt={slide.alt}
+                      fill
+                      priority={index === 0}
+                      sizes="50vw"
+                      className={`object-contain object-right transition-transform duration-[7000ms] ${
+                        active ? 'scale-105' : 'scale-100'
+                      }`}
+                    />
+
+                  </div>
+
+                </>
+              )}
+
+            </div>
+
+          </div>
+
+        )
+
+      })}
+
+      {/* =========================
+            CONTENT STARTS HERE
+      ========================== */}
+
+      <div className="relative z-20 h-full">
+      {/* =========================
+            MOBILE CONTENT
+      ========================== */}
+
+      <div className="flex lg:hidden items-center justify-center h-full px-6">
+
+        <div className="max-w-xl text-center">
+
+          <p className="text-accent uppercase tracking-[0.35em] text-xs mb-5 animate-fadeIn">
+            Premium Nigerian Fashion House
+          </p>
+
+          <h1 className="font-serif text-white text-5xl leading-tight mb-6">
+            {settings.heroHeadline ||
+              'Premium Bespoke Fashion Crafted for Every Occasion'}
+          </h1>
+
+          <p className="text-white/80 text-lg leading-8 mb-10">
+            {settings.heroSubheading ||
+              'From traditional Agbada to contemporary streetwear, every outfit is tailored with exceptional craftsmanship, precision and elegance.'}
+          </p>
+
+          <div className="flex flex-col gap-4">
+
+            <Link
+              href="/collections"
+              className="bg-accent text-primary py-4 px-8 rounded-sm font-medium transition-all duration-300 hover:scale-[1.03]"
+            >
+              Explore Collections
+            </Link>
+
+            <a
+              href={generateGeneralWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/25 bg-white/10 backdrop-blur-md text-white py-4 px-8 rounded-sm flex justify-center items-center gap-3 hover:bg-white/20 transition-all duration-300"
+            >
+              <FaWhatsapp size={22} />
+              Chat with the Designer
+            </a>
+
+          </div>
 
         </div>
 
       </div>
 
-      <button
-        onClick={() =>
-          setCurrent((prev) =>
-            prev === 0 ? slides.length - 1 : prev - 1
-          )
-        }
-        className="absolute left-6 top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/20 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:bg-black/40 lg:flex"
-      >
-        ←
-      </button>
+      {/* =========================
+            DESKTOP CONTENT
+      ========================== */}
 
-      <button
-        onClick={() =>
-          setCurrent((prev) =>
-            prev === slides.length - 1 ? 0 : prev + 1
-          )
-        }
-        className="absolute right-6 top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/20 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:bg-black/40 lg:flex"
-      >
-        →
-      </button>
+      <div className="hidden lg:flex h-full items-center">
 
-      <div className="absolute bottom-0 left-0 h-[2px] w-full bg-white/10">
+        <div className="max-w-7xl mx-auto w-full px-14 xl:px-24">
 
-        <motion.div
-          key={current}
-          initial={{ width: '0%' }}
-          animate={{ width: '100%' }}
-          transition={{
-            duration: 6,
-            ease: 'linear'
-          }}
-          className="h-full bg-accent"
-        />
+          {slides[currentSlide].side === 'right' ? (
+
+            <div className="grid grid-cols-2 items-center">
+
+              {/* TEXT */}
+
+              <div className="pr-16">
+
+                <p className="text-accent uppercase tracking-[0.35em] text-sm mb-6">
+                  Premium Nigerian Fashion House
+                </p>
+
+                <h1 className="font-serif text-white text-6xl xl:text-7xl leading-[1.08] mb-8">
+                  {settings.heroHeadline ||
+                    'Premium Bespoke Fashion Crafted for Every Occasion'}
+                </h1>
+
+                <p className="text-white/70 text-xl leading-9 max-w-xl mb-12">
+                  {settings.heroSubheading ||
+                    'From traditional Agbada to contemporary streetwear, every outfit is tailored with exceptional craftsmanship, precision and elegance.'}
+                </p>
+
+                <div className="flex gap-5">
+
+                  <Link
+                    href="/collections"
+                    className="bg-accent text-primary px-9 py-4 rounded-sm font-medium hover:scale-105 transition-all duration-300"
+                  >
+                    Explore Collections
+                  </Link>
+
+                  <a
+                    href={generateGeneralWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-white/20 bg-white/10 backdrop-blur-md px-9 py-4 rounded-sm text-white flex items-center gap-3 hover:bg-white/20 transition-all duration-300"
+                  >
+                    <FaWhatsapp />
+                    Chat with the Designer
+                  </a>
+
+                </div>
+
+              </div>
+
+              {/* EMPTY COLUMN */}
+
+              <div />
+
+            </div>
+
+          ) : (
+
+            <div className="grid grid-cols-2 items-center">
+
+              {/* EMPTY COLUMN */}
+
+              <div />
+
+              {/* TEXT */}
+
+              <div className="pl-16">
+
+                <p className="text-accent uppercase tracking-[0.35em] text-sm mb-6">
+                  Premium Nigerian Fashion House
+                </p>
+
+                <h1 className="font-serif text-white text-6xl xl:text-7xl leading-[1.08] mb-8">
+                  {settings.heroHeadline ||
+                    'Premium Bespoke Fashion Crafted for Every Occasion'}
+                </h1>
+
+                <p className="text-white/70 text-xl leading-9 max-w-xl mb-12">
+                  {settings.heroSubheading ||
+                    'From traditional Agbada to contemporary streetwear, every outfit is tailored with exceptional craftsmanship, precision and elegance.'}
+                </p>
+
+                <div className="flex gap-5">
+
+                  <Link
+                    href="/collections"
+                    className="bg-accent text-primary px-9 py-4 rounded-sm font-medium hover:scale-105 transition-all duration-300"
+                  >
+                    Explore Collections
+                  </Link>
+
+                  <a
+                    href={generateGeneralWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-white/20 bg-white/10 backdrop-blur-md px-9 py-4 rounded-sm text-white flex items-center gap-3 hover:bg-white/20 transition-all duration-300"
+                  >
+                    <FaWhatsapp />
+                    Chat with the Designer
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          )}
 
       </div>
-
-      <div className="pointer-events-none absolute inset-0 border border-white/5" />
-
-    </section>
-  )
-}
