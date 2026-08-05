@@ -55,8 +55,7 @@ export default function HeroSection() {
       ? 'bg-[30%_center]'
       : 'bg-[70%_center]'
   }`}
-  style={{ backgroundImage: `url(${slide.image})` }}
-/>
+  style={{ backgroundImage: `url(${slide.image})` }} />
         </div>
       ))}
 
