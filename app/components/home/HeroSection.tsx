@@ -11,11 +11,27 @@ export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
-    { image: '/images/hero-agbada.jpg', alt: 'Agbada' },
-    { image: '/images/hero-kaftan.jpg', alt: 'Kaftan' },
-    { image: '/images/hero-english.jpg', alt: 'English Wear' },
-    { image: '/images/hero-streetwear.jpg', alt: 'Streetwear' },
-  ]
+  {
+    image: '/images/hero-agbada.jpg',
+    alt: 'Agbada',
+    position: 'right'
+  },
+  {
+    image: '/images/hero-kaftan.jpg',
+    alt: 'Kaftan',
+    position: 'left'
+  },
+  {
+    image: '/images/hero-english.jpg',
+    alt: 'English Wear',
+    position: 'right'
+  },
+  {
+    image: '/images/hero-streetwear.jpg',
+    alt: 'Streetwear',
+    position: 'left'
+  },
+]
 
   useEffect(() => {
     const timer = setInterval(() => {
