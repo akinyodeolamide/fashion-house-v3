@@ -7,20 +7,19 @@ import defaultArchive from '@/app/data/archive.json'
 import defaultSettings from '@/app/data/settings.json'
 import defaultStats from '@/app/data/stats.json'
 
-// Public site ALWAYS reads fresh JSON. Admin only uses localStorage for preview.
+// Only use localStorage in admin panel. Public site always reads fresh JSON.
 function isAdmin(): boolean {
   if (typeof window === 'undefined') return false
   return window.location.pathname.startsWith('/admin')
 }
 
 function getStoredData<T>(key: string, fallback: T): T {
-  // NEVER use localStorage on public pages
   if (!isAdmin()) return fallback
   try {
     const stored = localStorage.getItem(`cms_${key}`)
     if (stored) return JSON.parse(stored)
   } catch {
-    // ignore
+    // ignore parse errors
   }
   return fallback
 }
@@ -51,7 +50,12 @@ export function initCMSData(): void {
 
 export const cms = {
   products: {
-    getAll: (): Product[] => getStoredData('products', defaultProducts).products,
+    getAll: (): Product[] =>
+      (getStoredData('products', defaultProducts).products || []).map((p: any) => ({
+        ...p,
+        images: p.images ?? [],
+        videos: p.videos ?? [],
+      })),
     setAll: (products: Product[]) => setStoredData('products', { products }),
     getById: (id: string): Product | undefined =>
       cms.products.getAll().find((p: Product) => p.id === id),
@@ -72,14 +76,24 @@ export const cms = {
   },
 
   categories: {
-    getAll: (): Category[] => getStoredData('categories', defaultCategories).categories,
+    getAll: (): Category[] =>
+      (getStoredData('categories', defaultCategories).categories || []).map((c: any) => ({
+        ...c,
+        image: c.image || '',
+      })),
     setAll: (categories: Category[]) => setStoredData('categories', { categories }),
     getBySlug: (slug: string): Category | undefined =>
       cms.categories.getAll().find((c: Category) => c.slug === slug),
   },
 
   posts: {
-    getAll: (): Post[] => getStoredData('posts', defaultPosts).posts,
+    getAll: (): Post[] =>
+      (getStoredData('posts', defaultPosts).posts || []).map((p: any) => ({
+        ...p,
+        images: p.images ?? [],
+        videos: p.videos ?? [],
+        tags: p.tags ?? [],
+      })),
     setAll: (posts: Post[]) => setStoredData('posts', { posts }),
     getFeatured: (): Post[] => cms.posts.getAll().filter((p: Post) => p.featured).slice(0, 4),
     getById: (id: string): Post | undefined =>
@@ -95,12 +109,21 @@ export const cms = {
   },
 
   testimonials: {
-    getAll: (): Testimonial[] => getStoredData('testimonials', defaultTestimonials).testimonials,
+    getAll: (): Testimonial[] =>
+      (getStoredData('testimonials', defaultTestimonials).testimonials || []).map((t: any) => ({
+        ...t,
+        image: t.image || '',
+      })),
     setAll: (testimonials: Testimonial[]) => setStoredData('testimonials', { testimonials }),
   },
 
   archive: {
-    getAll: (): ArchiveItem[] => getStoredData('archive', defaultArchive).archive as ArchiveItem[],
+    getAll: (): ArchiveItem[] =>
+      ((getStoredData('archive', defaultArchive).archive as ArchiveItem[]) || []).map((a: any) => ({
+        ...a,
+        images: a.images ?? [],
+        tags: a.tags ?? [],
+      })),
     setAll: (archive: ArchiveItem[]) => setStoredData('archive', { archive }),
     getByCategory: (category: string): ArchiveItem[] =>
       cms.archive.getAll().filter((a: ArchiveItem) => a.category === category),
@@ -108,12 +131,12 @@ export const cms = {
   },
 
   settings: {
-    get: (): SiteSettings => getStoredData('settings', defaultSettings).settings,
+    get: (): SiteSettings => getStoredData('settings', defaultSettings).settings || ({} as SiteSettings),
     set: (settings: SiteSettings) => setStoredData('settings', { settings }),
   },
 
   stats: {
-    getAll: (): TrustStat[] => getStoredData('stats', defaultStats).stats,
+    getAll: (): TrustStat[] => (getStoredData('stats', defaultStats).stats || []),
     setAll: (stats: TrustStat[]) => setStoredData('stats', { stats }),
   },
 }
