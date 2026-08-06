@@ -78,6 +78,8 @@ export default function HeroSection() {
       ========================== */}
       {slides.map((slide, index) => {
         const active = index === currentSlide
+        // Focus on the side where the mannequin/clothes actually are
+        const mobileFocus = slide.side === 'right' ? '85% center' : '15% center'
 
         return (
           <div
@@ -96,9 +98,8 @@ export default function HeroSection() {
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className={`object-cover ${
-                  slide.side === 'left' ? 'object-left' : 'object-right'
-                } transition-transform duration-[7000ms] ${
+                style={{ objectPosition: mobileFocus }}
+                className={`object-cover transition-transform duration-[7000ms] ${
                   active ? 'scale-105' : 'scale-100'
                 }`}
               />
