@@ -47,7 +47,6 @@ export default function HeroSection() {
   const [settings, setSettings] = useState<Settings>({})
 
   useEffect(() => {
-    // Safely read CMS settings inside useEffect to avoid SSR/build-time errors
     try {
       const s = cms.settings.get()
       setSettings(s || {})
@@ -97,7 +96,9 @@ export default function HeroSection() {
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className={`object-cover object-center transition-transform duration-[7000ms] ${
+                className={`object-cover ${
+                  slide.side === 'left' ? 'object-left' : 'object-right'
+                } transition-transform duration-[7000ms] ${
                   active ? 'scale-105' : 'scale-100'
                 }`}
               />
