@@ -22,23 +22,24 @@
       "category": "Agbada"
     },
     {
-      "shortDescription": "Elegant midnight blue kaftan with silver threadwork in luxurious silk-cotton blend.",
+      "shortDescription": "Premium espresso brown kaftan crafted from luxurious soft-finish cotton, featuring a relaxed oversized fit, clean band collar, and matching trousers.",
       "categorySlug": "kaftan",
       "price": 280000,
       "startingFrom": false,
-      "name": "Midnight Blue Kaftan",
-      "slug": "midnight-blue-kaftan",
+      "name": "Espresso Heritage Kaftan",
+      "slug": "espresso-heritage-kaftan",
       "showPrice": true,
       "featured": true,
       "updatedAt": "2024-05-15",
       "images": [
         "/images/kaftan-1.jpg",
-        "/images/kaftan-1b.jpg"
+        "/images/kaftan-1b.jpg",
+        "/images/kaftan-1c.jpg"
       ],
       "videos": [],
       "id": "prod-2",
       "createdAt": "2024-02-10",
-      "description": "An elegant midnight blue kaftan featuring subtle silver threadwork along the neckline and cuffs. Made from luxurious silk-cotton blend that drapes beautifully and feels incredible against the skin. This versatile piece transitions seamlessly from daytime events to evening gatherings. The relaxed yet refined silhouette flatters all body types, while the detailed finishing speaks to our commitment to excellence.",
+      "description": "A refined espresso brown kaftan designed for the modern gentleman who values understated luxury. Tailored from premium soft-finish cotton with a structured drape, this two-piece ensemble features a relaxed oversized top with wide sleeves, a clean band collar, concealed front placket, and matching straight-cut trousers. Its minimalist silhouette is elevated by impeccable craftsmanship and precision tailoring, creating a timeless piece that commands attention without excess. Ideal for exclusive gatherings, Friday prayers, cultural celebrations, and sophisticated evening occasions, the Espresso Heritage Kaftan embodies quiet confidence and effortless elegance.",
       "category": "Kaftan"
     },
     {
