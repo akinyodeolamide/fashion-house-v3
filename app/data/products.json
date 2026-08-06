@@ -33,7 +33,7 @@
       "updatedAt": "2024-05-15",
       "images": [
         "/images/kaftan-1.jpg",
-        "/images/products/kaftan-1b.jpg"
+        "/images/kaftan-1b.jpg"
       ],
       "videos": [],
       "id": "prod-2",
@@ -52,9 +52,9 @@
       "featured": true,
       "updatedAt": "2024-06-01",
       "images": [
-        "/images/products/senator-1.jpg",
-        "/images/products/senator-1b.jpg",
-        "/images/products/senator-1c.jpg"
+        "/images/senator-1.jpg",
+        "/images/senator-1b.jpg",
+        "/images/senator-1c.jpg"
       ],
       "videos": [],
       "id": "prod-3",
@@ -73,8 +73,8 @@
       "featured": true,
       "updatedAt": "2024-04-10",
       "images": [
-        "/images/products/english-1.jpg",
-        "/images/products/english-1b.jpg"
+        "/images/english-1.jpg",
+        "/images/english-1b.jpg"
       ],
       "videos": [],
       "id": "prod-4",
