@@ -164,19 +164,6 @@
       "createdAt": "2024-04-01",
       "description": "A commanding navy double-breasted blazer with gold buttons. The structured shoulders and nipped waist create a powerful silhouette. Made from Italian wool-blend fabric with a subtle sheen. Features wide peak lapels, flap pockets, and a welt breast pocket. Fully lined with custom Òwe Bespoke monogram lining. A statement piece for the discerning gentleman.",
       "category": "English Wear"
-    },
-    {
-      "shortDescription": "Silhouette",
-      "categorySlug": "agbada",
-      "price": 60000,
-      "startingFrom": true,
-      "name": "Royal Emerald",
-      "slug": "royal-emerald",
-      "showPrice": true,
-      "featured": false,
-      "id": "prod-9",
-      "description": "New emerald agbada",
-      "category": "Agbada"
     }
   ]
 }
