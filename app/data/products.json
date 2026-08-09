@@ -109,15 +109,15 @@
       "shortDescription": "Grand Isiagu chieftaincy set in premium velvet with iconic lion-head pattern and gold trim.",
       "categorySlug": "native-wear",
       "price": 520000,
-      "startingFrom": true,
+      "startingFrom": false,
       "name": "Isiagu Chieftaincy Set",
       "slug": "isiagu-chieftaincy-set",
       "showPrice": true,
       "featured": true,
       "updatedAt": "2024-05-20",
       "images": [
-        "/images/products/native-1.jpg",
-        "/images/products/native-1b.jpg"
+        "/images/native.jpg",
+        "/images/native-1b.jpg"
       ],
       "videos": [],
       "id": "prod-6",
